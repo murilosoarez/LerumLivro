@@ -29,8 +29,7 @@ export default function Register() {
         setMessage(err)
       })
   }
-
-
+  
   return (
     <form onSubmit={register}>
       {message ? <p>{message}</p> : ""}
