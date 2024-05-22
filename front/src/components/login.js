@@ -1,8 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { AccountContext } from '../Account';
 import axios from 'axios';
+import Private from '../ProtectedRoutes';
+
+import { useNavigate } from 'react-router-dom';
 
 export default function Login() {
 
+    const navigate = useNavigate();
+    const { setUser } = useContext(AccountContext)
     const [data, setData] = useState({
         user: '',
         password: ''
@@ -23,7 +29,12 @@ export default function Login() {
         await axios.post("http://localhost:8080/login", data, headers)
 
             .then((response) => {
-                setMessage(response.data.message);
+                if (response.data.result) {
+                    setUser({...response.data});
+                    navigate('/Home');
+                } else {
+                    setMessage(response.data.message);
+                }
             })
             .catch((err) => {
                 setMessage(err);

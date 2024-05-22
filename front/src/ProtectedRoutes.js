@@ -1,9 +1,11 @@
+import { useContext } from 'react';
+import { AccountContext } from './Account';
 import { Outlet } from 'react-router';
 import Login from './pages/login';
 
 const useAuth = () => {
-    const user = { loggedIn: false }
-    return user && user.loggedIn;
+    const user = useContext(AccountContext);
+    return user;
 }
 
 const ProtectedRoutes = () => {
