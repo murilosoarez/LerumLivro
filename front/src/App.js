@@ -1,9 +1,12 @@
 
 import AppRoutes from './Routes';
+import Context from './Account'
 
 function App() {
   return (
-    <AppRoutes/>
+    <Context>
+      <AppRoutes/>
+    </Context>
   )
 }
 

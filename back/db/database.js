@@ -10,6 +10,7 @@ const db = new Pool({
 })
 
 function database() {
+
     async function createTable() {
  
         try {
@@ -51,7 +52,24 @@ function database() {
         
     }
 
-    return { createTable, createColumn}
+    async function readColumn(custom_query) {
+
+        let result ;
+
+        try {
+            await db.connect();
+            result = db.query(custom_query);
+        }
+        catch(err) {
+            return err 
+        }
+        finally {
+            return result
+        }
+
+    }
+
+    return { createTable, createColumn, readColumn }
 }
 
 module.exports=  database
