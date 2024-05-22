@@ -20,7 +20,6 @@ export default function Login() {
                 'Content-Type': 'application/json'
             }
         }
-        
         await axios.post("http://localhost:8080/login", data, headers)
 
             .then((response) => {
