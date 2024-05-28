@@ -1,0 +1,23 @@
+import React, { useContext } from 'react';
+import { Routes, Route } from 'react-router-dom';
+
+import Login from '../pages/login';
+import Home from '../pages/home';
+import Register from '../pages/register';
+
+import { AccountContext } from './Account'
+
+import ProtectedRoutes from '../ProtectedRoutes';
+
+export default function AppRoutes() {
+  const { user } = useContext(AccountContext)
+  return (
+    <Routes>
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
+      <Route element={<ProtectedRoutes />}>
+        <Route path="/home" element={<Home />} />
+      </Route>
+    </Routes>
+  );
+}

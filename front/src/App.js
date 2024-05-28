@@ -1,12 +1,13 @@
 
-import AppRoutes from './Routes';
-import Context from './Account'
+import AppRoutes from './components/Routes';
+import UserContext from './components/Account'
+
 
 function App() {
   return (
-    <Context>
+    <UserContext>
       <AppRoutes/>
-    </Context>
+    </UserContext>
   )
 }
 
