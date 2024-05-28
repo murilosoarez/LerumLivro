@@ -27,7 +27,6 @@ export default function UserContext ({ children })  {
         return;
       }
       setUser({ ...data });
-      navigate('/Home');
     });
   }, []);
   return (
