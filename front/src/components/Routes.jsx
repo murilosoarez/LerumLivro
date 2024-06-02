@@ -14,6 +14,7 @@ export default function AppRoutes() {
   const { user } = useContext(AccountContext)
   return (
     <Routes>
+      <Route path = "/" element = {<Login/>}/>
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route element={<ProtectedRoutes />}>
