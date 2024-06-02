@@ -5,12 +5,12 @@ const helmet = require('helmet');
 const session = require('express-session');
 app = express();
 const server = require("http").createServer(app);
-const {Server} = require("socket.io");
+const { Server } = require("socket.io");
 
 const io = new Server(server, {
     cors: {
-      origin: "http://localhost:3000",
-      credentials: "true",
+        origin: "http://localhost:3000",
+        credentials: "true",
     },
 });
 
@@ -22,13 +22,13 @@ const db = database();
 
 const register = express.Router();
 const login = express.Router();
-
+const shelf = express.Router();
 
 register.post('/', async (req, res) => {
     let data = req.body
     db.createColumn(data, `INSERT INTO userData (username, email, senha) VALUES ($1, $2, $3)`)
     return res.json({
-        error: false, 
+        error: false,
         message: 'Cadastrado com sucesso!',
         formData: data
     })
@@ -37,19 +37,21 @@ register.post('/', async (req, res) => {
 login.post('/', async (req, res) => {
     let outcome = false;
     let data = req.body;
-    
-    let response = await db.readColumn('SELECT username, senha FROM userData');
+
+    let response = await db.readColumn('SELECT * FROM userData');
     if (response.rows.length == 0) { outcome = false }
 
     response.rows.forEach((row) => {
         if (row.username == data.user && row.senha == data.password) {
             outcome = true;
             req.session.user = {
-                'username': row.username
+                'username': row.username,
+                'email': row.email, 
+                'id': row.id
             }
         }
     })
-    
+
     let text = outcome ? 'Login bem sucedido' : 'Login mal sucedido';
     return res.json({
         loggedIn: outcome,
@@ -61,48 +63,58 @@ login.post('/', async (req, res) => {
 
 login.get('/', async (req, res) => {
     if (req.session.user && req.session.user.username) {
-      return res.json({ loggedIn: true, username: req.session.user.username });
+        return res.json({ loggedIn: true, username: req.session.user.username, id: req.session.user.id });
     } else {
-      return res.json({ loggedIn: false });
+        return res.json({ loggedIn: false });
     }
 })
 
+shelf.post('/', async (req, res) => {
+    const data = req.body
+    db.createColumn(data, `INSERT INTO reads (title, author, pages, review, "check", id_user) VALUES ($1, $2, $3, $4, $5, $6)`)
+    return res.json({
+        error: false,
+        message: 'Cadastrado com sucesso!',
+        formData: data
+    })
+})
 
 
 app.use(cors(
-        {
-            origin: "http://localhost:3000",
-            credentials: true,
-        }
-    )
+    {
+        origin: "http://localhost:3000",
+        credentials: true,
+    }
+)
 );
 
 app.use(express.json());
 app.use(
     session({
-      secret: process.env.COOKIE_SECRET,
-      credentials: true,
-      name: "sid",
-      resave: false,
-      saveUninitialized: false,
-      cookie: {
-        path: '/',
-        secure: process.env.ENVIRONMENT === "production" ? "true" : "auto",
-        httpOnly: true,
-        expires: 1000 * 60 * 60 * 24 * 7,
-        sameSite: process.env.ENVIRONMENT === "production" ? "none" : "lax",
-      },
+        secret: process.env.COOKIE_SECRET,
+        credentials: true,
+        name: "sid",
+        resave: false,
+        saveUninitialized: false,
+        cookie: {
+            path: '/',
+            secure: process.env.ENVIRONMENT === "production" ? "true" : "auto",
+            httpOnly: true,
+            expires: 1000 * 60 * 60 * 24 * 7,
+            sameSite: process.env.ENVIRONMENT === "production" ? "none" : "lax",
+        },
     })
-  );
+);
 
-app.use('/register', register)
-app.use('/login', login)
-
-
-
+app.use('/shelf', shelf);
+app.use('/register', register);
+app.use('/login', login);
 
 
-io.on("connect", socket => {});
+
+
+
+io.on("connect", socket => { });
 app.listen('8080', () => {
     db.createTable()
     console.log('Servidor executando')

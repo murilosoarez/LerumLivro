@@ -25,7 +25,19 @@ function database() {
           );
           `
 
+          const query_2 = `CREATE TABLE IF NOT EXISTS reads (
+            ID serial PRIMARY KEY, 
+            title VARCHAR(50) NOT NULL,
+            author VARCHAR(50) NOT NULL,
+            pages INT,
+            review VARCHAR(200) NOT NULL, 
+            "check" VARCHAR(10) NOT NULL, 
+            id_user INT NOT NULL
+          );`
+
           await db.query(query)
+          await db.query(query_2)
+
         }
         
         catch(err) { 
