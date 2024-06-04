@@ -42,18 +42,22 @@ export default function Login() {
     }
 
     return (
-        <form onSubmit={sendData}>
+        <form class = 'Form' onSubmit={sendData}>
+            <h3> Bem vindo novamente </h3>
             {message ? <p>{message}</p> : ""}
             <section>
-                <label>Usuário:</label>
+                <label>Usuário</label>
                 <input name='user' type='text' onChange={valorInput}></input>
             </section>
             <section>
-                <label>Senha:</label>
+                <label>Senha</label>
                 <input name='password' type='password' onChange={valorInput}></input>
             </section>
             <section>
-                <input type='submit'></input>
+                <input id = 'submit' type='submit' value = 'Enviar'></input>
+            </section>
+            <section>
+                <span> Não possui conta? <a href = "/Register">Registre-se aqui!</a></span>
             </section>
         </form>
     )
