@@ -5,6 +5,7 @@
     padding: 50px
     height: auto
     background: variable.$primary-color
+    font-family: Arial, Helvetica, sans-serif
 
     .Form-Section
         @include mixins.displayFlex
@@ -24,8 +25,10 @@
         
         img 
             position: relative
-            top: -100px
-            left: -40px
+            top: -10%
+            left: 0%
+            width: 400px
+            height: 60%
 
         .Form 
             @include mixins.displayFlex
@@ -55,21 +58,7 @@
                     font-size: 18px
                     font-weight: 100
                     border: 1px solid variable.$primary-color
-
-                #submit 
-                    width: 200px
-                    height: 50px
-                    font-weight: 300
-                    background: white 
-                    font-weight: bolder
-                    align-self: center
-
-                    &:hover
-                        cursor: pointer
-                        background: lightgrey
-                        color: variable.$primary-color
-                        font-weight: bolder
-                   
+            
     .Palm-1
         position: absolute
         left: 30px
@@ -88,3 +77,6 @@
         overflow: hidden
 
    
+@media (max-width: 1300px) 
+    .Palm-1, .Palm-2
+        display: none    

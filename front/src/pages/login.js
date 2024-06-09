@@ -1,8 +1,8 @@
 import React from 'react'
-import Form from '../components/Login.jsx'
+
+import Form from '../components/forms/Login'
 
 import palm_1 from '../images/palm-1.png'
-import palm_2 from '../images/palm-2.png'
 import statue from '../images/statue.png'
 
 import '../styles/login.sass'
