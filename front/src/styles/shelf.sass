@@ -1,0 +1,88 @@
+@use './asset/mixins'
+@use './asset/variable'
+
+.Header-Book 
+    height: 5vh
+    background-image: url('../images/bookshelf.jpg')
+    background-size: cover 
+
+
+.Shelf 
+    display: flex
+    height: 95vh 
+    font-family: 'Arial'
+
+    .Form-Shelf 
+        @include mixins.displayFlex
+        justify-content: center
+        height: 100%
+        width: 40vw
+        border: 2px solid black
+
+        div 
+            @include mixins.displayFlex 
+            width: 100%
+            height: 100%
+
+        .Form 
+            @include mixins.displayFlex
+            flex-direction: column
+            gap: 15px
+            width: 90%
+            height: 90%
+            border-radius: 25px
+            background: variable.$primary-color
+            color: white
+        
+            section 
+                @include mixins.displayFlex
+                flex-direction: column
+                gap: 5px
+                width: 100%
+
+                input 
+                    width: 90%
+                    height: 50px
+                    padding: 5px
+                    font-size: 16px
+                    font-weight: 100
+                    outline: none
+
+                textarea
+                    @include mixins.displayFlex
+                    width: 90%
+                    height: 60px
+                    padding: 5px
+
+            section:nth-child(4)
+                display: flex
+                flex-direction: row
+                
+                input 
+                    height: 30px
+
+                div 
+                    @include mixins.displayFlex
+                    gap: 10px
+                    width: 150px
+
+                #check 
+                    width: 20px
+                    height: 20px
+
+    .Book-Section 
+        width: 60vw
+        padding: 15px
+
+        .Book-Shelf
+            display: grid 
+            grid-template-columns: repeat(2, 50%)
+            grid-template-rows: repeat(auto-fill, 20%)
+            padding: 5px
+            gap: 5px
+            border: 1px solid black
+            height: 93%
+            overflow: cursor
+
+            div 
+                background: variable.$primary-color

@@ -1,2 +1,44 @@
+@use './asset/mixins'
+@use './asset/variable'
+
+    
 .Home 
-    background: red
+    height: 100vh
+    font-family: 'Arial'
+
+    section 
+        height: 50vh
+        
+    .Sect-1
+        @include mixins.displayFlex
+        justify-content: space-between
+        height: 50vh
+
+        .User 
+            @include mixins.displayFlex
+            height: 100%
+            width: 80%
+            padding: 20px
+            gap: 15px
+            border: 1px solid white 
+
+            img 
+                width: 300px
+                height: 300px
+                border: 1px dotted black
+                border-radius: 150px
+                background: variable.$primary-color
+
+        .Plants 
+            height: 100%
+
+            img
+                width: 500px
+                height: 100%
+    
+    .Sect-2 
+        @include mixins.displayFlex
+        justify-content: space-around
+        background: variable.$primary-color
+
+       

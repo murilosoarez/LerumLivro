@@ -43,7 +43,8 @@ export default function Shelf() {
     }
     return (
         <div>
-            <form onSubmit = {register}>
+            <form class = 'Form' onSubmit = {register}>
+                <h2> Marque aqui sua leitura! </h2>
                 {message ? <p>{message}</p> : ''}
                 <section>
                     <label htmlFor="title">Nome do livro: </label>
@@ -54,19 +55,24 @@ export default function Shelf() {
                     <input name="author" type="text" onChange={valorInput}></input>
                 </section>
                 <section>
-                    <label htmlFor="pages">Páginas:</label>
-                    <input name="pages" type="number" onChange={valorInput}></input>
+                    <div>
+                        <label htmlFor="pages">Páginas:</label>
+                        <input name="pages" type="number" onChange={valorInput}></input>
+                    </div>
+                    <div>
+                    <div>
+                        <label htmlFor="check">Aprovado?</label>
+                        <input id = 'check' name="check" type="checkbox" onChange={valorInput}></input>
+                    </div>
+                    </div>
                 </section>
                 <section>
                     <label htmlFor="review">Escreva o que achou: </label>
                     <textarea name="review" onChange={valorInput}></textarea>
                 </section>
-                <section>
-                    <label htmlFor="check">Aprovado?</label>
-                    <input name="check" type="checkbox" onChange={valorInput}></input>
-                </section>
-                <section>
-                    <input type='submit'></input>
+                <section class = 'Checked'>
+                   
+                    <input id = 'submit' type='submit' value = 'Enviar'></input>
                 </section>
             </form>
         </div>
