@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 
 import Validating from '../Validating'
 
-import Submit from '../commons/Button/btn'
+import Submit from '../commons/Button/btn.jsx'
 
 export default function Login() {
     

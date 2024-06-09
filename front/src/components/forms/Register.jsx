@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-import Submit from '../html/Button/btn';
+import Submit from '../commons/Button/btn';
 import Validating from '../Validating';
 
 export default function Register() {
